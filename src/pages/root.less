@@ -1,0 +1,68 @@
+.main {
+    height: 100%;
+    .page-right {
+        margin-left: 200px;
+        height: 100%;
+        background-color: #c7c4c49e;
+        .main-content {
+            margin: 7px 5px 0px 5px;
+            background-color: white;
+            overflow: hidden;
+            height: 100%;
+
+
+            .query-box {
+                padding: 10px 20px;
+                border-bottom: solid 2px #d4cece;
+                .search-Col {
+                    text-align: right;
+                }
+            }
+
+            .tab-nav {
+                padding-left: 20px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                button {
+                    margin-right: 10px;
+                }
+            }
+
+            
+
+
+
+
+
+
+
+            .sub-page{
+
+            
+                //--------------- 覆盖 antd 样式--------------------------------------------------
+                //覆盖 表格 table 表头的padding 
+                .ant-table-thead > tr > th {
+                    padding: 10px 10px;
+                }
+                .ant-table-tbody > tr > td {
+                    padding: 10px 10px;
+                }
+
+                // 覆盖 表格 table 没有数据时的placehoder padding
+                .ant-table-placeholder {
+                    padding: 10px 10px;
+                }
+            }
+
+        }
+    }
+    .modal-large{
+        width: 70% !important;
+    }
+}
+.ant-modal-body {
+    padding: 10px 3px;
+}
+.ant-form-item {
+    margin-bottom: 15px;
+}

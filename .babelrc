@@ -1,0 +1,22 @@
+{
+    "presets": [
+        "latest",
+        "react",
+        "stage-0",
+        "stage-1",
+        "stage-2"
+    ],
+    "plugins": [
+        "transform-runtime",
+        "transform-decorators-legacy",
+        "transform-class-properties",
+        "add-module-exports",
+        [
+            "import",{
+                "libraryName": "antd",
+                "libraryDirectory": "lib",
+                "style": "css"
+            }
+        ]
+    ]
+}
