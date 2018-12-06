@@ -5,7 +5,8 @@
   "author": "yezi",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --progress --colors --config ./webpack/webpack.prod.config.js",
+    "clean": "rimraf ./dist/*",
+    "build": "npm run clean && webpack --progress --colors --config ./webpack/webpack.prod.config.js",
     "devbuild": "webpack --progress --colors --config ./webpack/webpack.dev.config.js",
     "dev": "webpack-dev-server --progress --colors --config ./webpack/webpack.dev.config.js"
   },
