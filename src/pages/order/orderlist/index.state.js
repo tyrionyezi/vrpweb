@@ -83,8 +83,26 @@ class State {
         }
     }
 
-    
+    // 修改订单状态
 
+    @observable orderStateCode = '';
+    @action set_orderStateCode = (val, val2) => {
+        console.log(val, val2)
+        this.orderStateCode = val;
+    }
+    @action update_order_status = async (record, val) => {
+        console.log(record)
+        let url = '/order/change_order_status';
+        let params = {
+            id: record.orderId,
+            orderStateCode: val,
+        }
+        let result = await _service._post(url, params);
+        if(result.data.success) {
+            _message.success(result.data.message);
+            this.getQueryData();
+        }
+    }
 
 }
 

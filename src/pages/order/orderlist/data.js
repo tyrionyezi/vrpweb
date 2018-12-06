@@ -74,7 +74,7 @@ const columns = [
     }, {
         title: '订单状态',
         dataIndex: 'orderStatus',
-        width: 100,
+        width: 130,
     }, {
         title: '订单创建时间',
         dataIndex: 'addTime',

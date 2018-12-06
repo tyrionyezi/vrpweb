@@ -48,6 +48,8 @@ class Index extends Component {
             <div  className="sub-page">
                 <TabNav
                     do_delete={_state.do_delete}
+                    update_user_status={_state.update_user_status}
+                    set_user_status={_state.set_user_status}
                 ></TabNav>
                 <Table
                     columns={_columns}

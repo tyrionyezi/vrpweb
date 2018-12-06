@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import { Table } from 'antd';
+import { Table, Select } from 'antd';
 import { withRouter, Link } from "react-router-dom";
 import styles from './index.less';
 import _state from './index.state.js';
 import { _scroll_x, _columns } from './data.js';
-import { _dictionary } from '@utils'
-console.log(_dictionary)
+import { _dictionary } from '@utils';
 import Query from './components/query/index.component'
 import Detail from './components/detail/index.component'
 import TabNav from './components/tabNav/index.component'
-
-
+const Option = Select.Option;
 
 @observer
 class Index extends Component {
@@ -20,6 +18,8 @@ class Index extends Component {
     }
 
     cell_render = (data) => {
+        let orderStatusList = this.set_order_list(_dictionary)
+        console.log(orderStatusList)
         data.map((item) => {
             item.render = (text, record, index) => {
                 if (item.dataIndex == 'operation') {
@@ -32,11 +32,37 @@ class Index extends Component {
                     )
                 }
                 if (item.dataIndex == 'orderStatus') {
-                    text = _dictionary.orderStatus[text];
+                    console.log(text)
+                    return (
+                        <Select
+                            style={{ width: 100 }}
+                            placeholder="请选择"
+                            onChange={_state.update_order_status.bind(this, record)}
+                            value={text + ''}
+                        >
+                            {orderStatusList.map((item, index) => {
+                                return (
+                                    <Option key={index} value={item.value}>{item.label}</Option>
+                                )
+                            })}
+                        </Select>
+                    )
                 }
                 return text;
             }
         })
+    }
+
+    set_order_list = (obj) => {
+        let keys = Object.keys(obj.orderStatus);
+        let arr = [];
+        keys.map((item) => {
+            arr.push({
+                value: item,
+                label: obj.orderStatus[item]
+            })
+        })
+        return arr;
     }
 
     to_router = (id) => {
@@ -46,10 +72,11 @@ class Index extends Component {
     paymentBill
 
     componentWillMount() {
-        _state.getGoodsList();
+        
 
     }
     componentDidMount() {
+        _state.getGoodsList();
         this.cell_render(_columns);
     }
 
@@ -57,6 +84,7 @@ class Index extends Component {
         const rowSelection = {
             selectedRowKeys: _state.selectedRowKeys,
             onChange: _state.onSelectChange,
+            // type:'radio',
         };
 
         return (
@@ -70,6 +98,8 @@ class Index extends Component {
                 </div>
                 <TabNav
                     do_delete={_state.do_delete}
+                    update_order_status={_state.update_order_status}
+                    set_orderStateCode={_state.set_orderStateCode}
                 ></TabNav>
                 <Table
                     columns={_columns}
@@ -77,13 +107,13 @@ class Index extends Component {
                     bordered
                     rowKey={(record, i) => i}
                     scroll={{
-                        x: 2770
+                        x: 2850
                     }}
                     onRow={(record) => {
-                            return {
-                                onDoubleClick: _state.getDetail.bind(this, record.orderId),
-                            }
+                        return {
+                            onDoubleClick: _state.getDetail.bind(this, record.orderId),
                         }
+                    }
                     }
                     rowSelection={rowSelection}
                 />

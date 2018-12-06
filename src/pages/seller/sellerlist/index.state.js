@@ -43,6 +43,33 @@ class State {
             this.selectedRowKeys = [];
         }
     }
+
+    
+    // 修改订单状态
+    @action update_user_status = async () => {
+        let url = 'user/update_shop_user';
+        let params = [];
+        if(this.selectedRows.length == 0) return _message.warning('请选择数据！');
+        if(this.user_status == '') return _message.warning('请选择修改状态！');
+        this.selectedRows.map((item)=> {
+            params.push({
+                id: item.userId,
+                userState: this.user_status,
+            })
+        })
+        let result = await _service._post(url, params)
+        if(result.data.success) {
+            _message.success(result.data.message);
+            this.getQueryData();
+            this.selectedRowKeys = [];
+            this.user_status = '';
+        }
+    }
+
+    @observable user_status = '';
+    @action set_user_status = (val) => {
+        this.user_status = val
+    }
 }
 
 export default new State()
