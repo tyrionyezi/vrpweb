@@ -5,7 +5,7 @@ import _state from './index.state.js';
 import { _scroll_x, _columns } from './data.js';
 import { _dictionary } from '@utils'
 import TabNav from './components/tabNav/index.component'
-
+import Query from './components/query/index.component'
 
 
 @observer
@@ -61,13 +61,13 @@ class Index extends Component {
 
         return (
             <div className="sub-page">
-                {/* <div className="query-box">
+                <div className="query-box">
                     <Query
                         queryParams={_state.queryParams}
                         setQueryParams={_state.setQueryParams}
-                        getGoodsList={_state.getGoodsList}
+                        getQueryData={_state.getQueryData}
                     ></Query>
-                </div> */}
+                </div>
                 <TabNav
                     do_delete={_state.do_delete}
                 ></TabNav>

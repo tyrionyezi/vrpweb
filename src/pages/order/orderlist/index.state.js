@@ -10,22 +10,22 @@ class State {
 
     @observable queryParams = {
         id: '',
+        orderNo: '',
+        buyerId: '',
+        startTime: '',
+        endTime: '',
     }
-    @observable id = '';
 
     @action setQueryParams = (key, value) => {
-        console.log(key, value);
-        this.id = value
         this.queryParams[key] = value;
-        console.log(this.queryParams.id)
     }
 
 
     @observable tableData = [];
     @action getGoodsList = async () => {
         const url = '/order/list_order';
-        // let params = Object.assign({}, this.queryParams);
-        let result = await _service._post(url);
+        let params = Object.assign({}, this.queryParams);
+        let result = await _service._post(url, params);
         if (result.data.success) {
             this.tableData = result.data.data;
         }

@@ -14,8 +14,8 @@ class Query extends Component {
     }
 
     handleSubmit = () => {
-        if(this.props.getGoodsList) {
-            this.props.getGoodsList();
+        if(this.props.getQueryData) {
+            this.props.getQueryData();
         }
     }
 
