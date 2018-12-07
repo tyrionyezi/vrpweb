@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { Table } from 'antd';
-// import styles from './index.css';
 import _state from './index.state.js';
 import { _scroll_x, _columns } from './data.js';
 import { _dictionary } from '@utils'

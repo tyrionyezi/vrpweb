@@ -50,10 +50,10 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+                use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'less-loader']
             }, {
                 test: /\.css/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
+                use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader']
             },
 
             // {
