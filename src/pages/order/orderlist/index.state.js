@@ -95,7 +95,7 @@ class State {
         let url = '/order/change_order_status';
         let params = {
             id: record.orderId,
-            orderStateCode: val,
+            orderStateCode: val + '',
         }
         let result = await _service._post(url, params);
         if(result.data.success) {
