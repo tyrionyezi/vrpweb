@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
     },
     devServer: {
         host: '127.0.0.1',
-        port: 9000,
+        port: 9001,
         proxy: { // proxy URLs to backend development server
             '/api': 'http://111.231.140.157:8081/vrp-web'
         },
@@ -50,10 +50,10 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'less-loader']
+                use: ['style-loader', 'css-loader', 'less-loader']
             }, {
                 test: /\.css/,
-                use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader']
+                use: ['style-loader', 'css-loader']
             },
 
             // {
@@ -88,36 +88,36 @@ module.exports = {
         hints: false
     },
     optimization: {
-        // splitChunks: {
-        //   cacheGroups: {
-        //     commons: {
-        //       test: /[\\/]node_modules[\\/]/,
-        //       name: 'vendors',
-        //       chunks: 'all'
-        //     }
-        //   }
-        // }
         splitChunks: {
-            chunks: 'async',
-            minSize: 30000,
-            maxSize: 0,
-            minChunks: 1,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
-            automaticNameDelimiter: '~',
-            name: true,
-            cacheGroups: {
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10
-                },
-                default: {
-                    minChunks: 2,
-                    priority: -20,
-                    reuseExistingChunk: true
-                }
+          cacheGroups: {
+            commons: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all'
             }
+          }
         }
+        // splitChunks: {
+        //     chunks: 'async',
+        //     minSize: 30000,
+        //     maxSize: 0,
+        //     minChunks: 1,
+        //     maxAsyncRequests: 5,
+        //     maxInitialRequests: 3,
+        //     automaticNameDelimiter: '~',
+        //     name: true,
+        //     cacheGroups: {
+        //         vendors: {
+        //             test: /[\\/]node_modules[\\/]/,
+        //             priority: -10
+        //         },
+        //         default: {
+        //             minChunks: 2,
+        //             priority: -20,
+        //             reuseExistingChunk: true
+        //         }
+        //     }
+        // }
     },
     resolve: {
         extensions: ['.js', '.jsx', 'json'],
@@ -140,10 +140,10 @@ module.exports = {
             inject: 'body',
             hash: true,
         }),
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
-            allChunks: true
-        }),
+        // new MiniCssExtractPlugin({
+        //     filename: '[name].css',
+        //     allChunks: true
+        // }),
         new CleanWebpackPlugin(['dist',
             'build'], {
                 root: __dirname,
